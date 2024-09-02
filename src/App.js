@@ -4,14 +4,15 @@ import BusinessResults from "./BusinessResults";
 import { gql, useQuery } from "@apollo/client";
 
 const GET_BUSINESSES_QUERY = gql`
-  {
-    businesses {
+  query BusinessesByCategory($selectedCategory: String!) {
+    businesses(where: { categories_SOME: { name_CONTAINS: $selectedCategory } }) {
       businessId
       name
       address
       categories {
         name
       }
+      isStarred @client
     }
   }
 `;
