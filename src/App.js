@@ -19,7 +19,10 @@ const GET_BUSINESSES_QUERY = gql`
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const { loading, error, data } = useQuery(GET_BUSINESSES_QUERY);
+  const { loading, error, data } = useQuery(GET_BUSINESSES_QUERY, {
+    variables: { selectedCategory },
+    pollInterval: 500
+  });
 
   if (error) return <p>Error</p>;
   if (loading) return <p>Loading...</p>;
